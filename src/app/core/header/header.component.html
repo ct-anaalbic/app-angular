@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a routerLink='/' class="navbar-brand" style="cursor: pointer">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink='/recipes'>Recipes<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink='/shopping-list'>Shoping List</a>
+      </li>
+    </ul>
+  </div>
+  <ul class="nav navbar-nav navbar-right">
+    <ng-template [ngIf]="!authService.isAuthentication()">
+        <li><a style="color: black;" routerLink="/sign-up">Register</a></li>
+        <li><a style="color: black;" routerLink="/sign-in">Login</a></li>
+    </ng-template>
+    <li><a style="color: black; cursor: pointer;" (click)="onLogedOut()" *ngIf="authService.isAuthentication()">Loged Out</a></li>
+    <li class="dropdown" appDropdown *ngIf="authService.isAuthentication()">
+      <a class="dropdown-toggle" role="button">Manage</a>
+      <ul class="dropdown-menu">
+        <li><a (click)="onSaveData()">Saving Data</a></li>
+        <li><a (click)="onFetchData()">Fetching Data</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
